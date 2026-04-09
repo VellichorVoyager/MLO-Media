@@ -6,3 +6,6 @@ openai==1.82.0
 supabase==2.28.3
 schedule==1.2.2
 tqdm==4.67.3
+fastapi==0.115.12
+uvicorn==0.34.0
+stripe==12.1.0

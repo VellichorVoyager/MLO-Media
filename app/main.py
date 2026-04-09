@@ -4,6 +4,7 @@ from workers.rss_worker import fetch_articles
 from workers.scraper import scrape_article
 from workers.enricher import categorize, tag
 from workers.embeddings import generate_embedding
+from workers.signal_engine import detect_signals
 from services.supabase_client import upsert_article
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,8 @@ def run_pipeline():
             article["embedding"] = generate_embedding(
                 article["title"] + " " + article.get("summary", "")
             )
+
+            article["signals"] = detect_signals(article)
 
             upsert_article(article)
         except Exception as exc:
